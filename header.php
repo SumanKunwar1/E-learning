@@ -160,8 +160,9 @@ session_start();
                         <!--  Menu Start  -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="./index.php" class="active">Home</a></li>
+                             <li class="scroll-to-section"><a href="./about.php" >About Us</a></li>
                             <li class="scroll-to-section"><a href="./services.php">Services</a></li>
-                            <li class="scroll-to-section"><a href="./courses.php">Courses</a></li>
+                            <li class="scroll-to-section"><a href="./courses.php">Programs</a></li>
                             <!-- <li class="scroll-to-section"><a href="./team.php">Team</a></li> -->
                             <!-- <li class="scroll-to-section"><a href="./feedback.php">Feedback</a></li> -->
                             <li class="scroll-to-section"><a href="./contact.php">Contact</a></li>

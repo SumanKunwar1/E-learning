@@ -75,9 +75,8 @@ if (isset($_POST['submit'])) {
             <div class="col-lg-5 align-self-center">
                 <div class="section-heading">
                     <h6>Our Services</h6>
-                    <h2>What makes us the best online learning platform?</h2>
-                    <p>By offering expertly crafted courses and engaging learning materials, we can provide learners
-                        with a top-notch educational experience that is both effective and enjoyable.</p>
+                    <h2>What makes us the best solution for addressing youth violence?</h2>
+                    <p>By providing targeted interventions, such as cognitive behavioral therapy (CBT), and creating supportive environments through youth empowerment hubs, we offer young individuals the tools to overcome negative behaviors, regulate their emotions, and build resilience for a healthier future.</p>
                     <div class="main-button">
                         <a href="./services.php">Discover More</a>
                     </div>

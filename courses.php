@@ -35,10 +35,10 @@ if (isset($_POST['submit'])) {
 <!-- Courses Area Start -->
 <div class="container mt-5">
     <!-- Start All Course -->
-    <h1 class="text-center">All Courses</h1>
+    <h1 class="text-center">Our Workshops and Community Tours</h1>
     <div class="search-control d-flex justify-content-center">
         <div class="input-group m-4" style="width: 50%;">
-            <input type="text" name="searchBox" class="form-control" id="searchBox" placeholder="Search Course..." style="text-align: left;">
+            <input type="text" name="searchBox" class="form-control" id="searchBox" placeholder="Search workshops and community tours..." style="text-align: left;">
             <button class="btn btn-secondary" type="button" style="padding: 0px 20px;font-size: larger;">
                 <i class="fas fa-search"></i>
             </button>
@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
                                     <div class="rating" style="color:#f7af14;">' . generateStarRating($avgRating) . '</div>
                                     <p class="card-text d-inline">Price: <small><del>&#36;' . $row['course_original_price'] . '</del></small></p>
                                     <span class="font-weight-bolder">&#36;' . $row['course_price'] . '</span>
-                                    <a class="btn btn-primary text-white font-weight-bolder float-right" href="coursedetails.php?course_id=' . $course_id . '">Enroll</a>
+                                    <a class="btn btn-primary text-white font-weight-bolder float-right" href="coursedetails.php?course_id=' . $course_id . '">View More</a>
                                 </div>
                             </div>
                         </a>

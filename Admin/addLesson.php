@@ -64,8 +64,8 @@ if (isset($_REQUEST['lessonSubmitBtn'])) {
   }
 }
 
- ?>
-<div class="col-sm-6 mt-5  mx-3 jumbotron">
+?>
+<div class="col-sm-6 mt-5 mx-3 jumbotron">
   <h3 class="text-center">Add New Lesson</h3>
   <form action="" method="POST" enctype="multipart/form-data">
     <div class="form-group">
@@ -95,19 +95,11 @@ if (isset($_REQUEST['lessonSubmitBtn'])) {
     <?php if(isset($msg)) {echo $msg; } ?>
   </form>
 </div>
-<!-- Only Number for input fields -->
-<script>
-  function isInputNumber(evt) {
-    var ch = String.fromCharCode(evt.which);
-    if (!(/[0-9]/.test(ch))) {
-      evt.preventDefault();
-    }
-  }
 
-</script>
-</div>  <!-- div Row close from header -->
-</div>  <!-- div Conatiner-fluid close from header -->
-<!-- Only Number for input fields -->
+<!-- jQuery Script (important) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Your JavaScript code -->
 <script>
   function isInputNumber(evt) {
     var ch = String.fromCharCode(evt.which);
@@ -172,7 +164,6 @@ if (isset($_REQUEST['lessonSubmitBtn'])) {
     }
   });
 </script>
-
 
 <?php
 include('./adminInclude/footer.php'); 

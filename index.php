@@ -1,5 +1,9 @@
 <!--  Header Area Start  -->
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include('./dbConnection.php');
 include('./header.php');
 // Check if the form is submitted
@@ -29,9 +33,9 @@ if (isset($_POST['submit'])) {
                 <div class="owl-carousel owl-banner">
                     <div class="item item-1">
                         <div class="header-text">
-                            <span class="category">Our Courses</span>
-                            <h2>With NextGen Teachers, Everything Is Easier</h2>
-                            <p>Nextgen is a website where you can explore any courses you want.</p>
+                            <span class="category">Our Programs</span>
+                            <h2>With Empowering Support, Change Becomes Possible</h2>
+                            <p>Our programs offer young people the resources and guidance they need to break the cycle of violence and build healthier, more resilient futures.</p>
                             <div class="buttons">
                                 <div class="main-button">
                                     <?php
@@ -52,7 +56,7 @@ if (isset($_POST['submit'])) {
                         <div class="header-text">
                             <span class="category">Best Result</span>
                             <h2>Get the best result out of your effort</h2>
-                            <p>You can develop your skills by enrolling with us.</p>
+                            <p>By participating in our programs, you can develop the skills to manage emotions, resolve conflicts, and make positive choices.</p>
                             <div class="buttons">
                                 <div class="main-button">
                                     <?php
@@ -70,9 +74,9 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="item item-3">
                         <div class="header-text">
-                            <span class="category">Online Learning</span>
-                            <h2>Online Learning helps you save the time</h2>
-                            <p>you can save time and develop skills and practice more coding in less time</p>
+                            <span class="category">Youth Empowerment</span>
+                                <h2>Youth Empowerment helps prevent violence</h2> 
+                                <p>By providing structured support and developing essential skills, young people can manage stress, build resilience, and reduce violent behaviors in less time.</p>
                             <div class="buttons">
                                 <div class="main-button">
                                     <?php
@@ -94,6 +98,13 @@ if (isset($_POST['submit'])) {
     </div>
 </div>
 <!-- Banner Area End -->
+
+<div class="container">
+
+<?php
+include("./about-section.php");
+?>
+</div>
 
 <!-- Services Area Start -->
 <div class="section services" id="services">
@@ -141,9 +152,8 @@ if (isset($_POST['submit'])) {
             <div class="col-lg-5 align-self-center">
                 <div class="section-heading">
                     <h6>Our Services</h6>
-                    <h2>What makes us the best online learning platform?</h2>
-                    <p>By offering expertly crafted courses and engaging learning materials, we can provide learners
-                        with a top-notch educational experience that is both effective and enjoyable.</p>
+                    <h2>What makes us the best solution for combating youth violence?</h2>
+                    <p>By offering targeted interventions like cognitive behavioral therapy (CBT) and providing structured, supportive environments through youth empowerment hubs, we help young people address negative behaviors, regulate emotions, and foster resilience. Our comprehensive approach supports both immediate behavioral changes and long-term personal growth.</p>
                     <div class="main-button">
                         <a href="./services.php">Discover More</a>
                     </div>
@@ -156,7 +166,7 @@ if (isset($_POST['submit'])) {
 
 
 <div class="container mt-5">
-    <h1 class="text-center p-5">Popular Course</h1>
+    <h1 class="text-center p-5">Popular Programs & Community Tours</h1>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php
         $sql = "SELECT * FROM course LIMIT 3";
@@ -274,7 +284,7 @@ function generateStarRating($rating)
 <div class="contact-section" id="contact">
         <div class="contact-info">
             <h2>Get in touch</h2>
-            <p>If you have any questions or inquiries, please feel free to get in touch with us. We'd love to hear from you!</p>
+            <p> If you have any questions, concerns, or would like to learn more about our programs, please reach out to us. We're here to help and eager to make a positive impact!</p>
         </div>
         <div class="contact-form">
     <h2>Contact us</h2>

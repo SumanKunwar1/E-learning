@@ -21,9 +21,9 @@ if(!isset($_SESSION['stuLogEmail']) && !isset($_SESSION['email'])) {
   $date = $date;
   $sql = "INSERT INTO courseorder(order_id, l_Email, course_id, status, respmsg, amount, order_date) VALUES ('$order_id', '$stu_email', '$course_id', '$status', '$respmsg', '$amount', '$date')";
    if($conn->query($sql) == TRUE){
-    echo "Course purchased successfully, please wait! you are redirecting to your profile...";
+    echo "Workshop or Community Tour booked successfully, please wait! you are redirecting to your profile...";
     echo "<script> setTimeout(() => {
-     window.location.href = './learner/myCourse.php';
+     window.location.href = './Learner/myCourse.php';
    }, 1500); </script>";
    };
  } else {

@@ -1,5 +1,5 @@
 <?php
-if(!isset($_SESSION)){ 
+if (!isset($_SESSION)) { 
   session_start(); 
 }
 define('TITLE', 'Add Course');
@@ -7,41 +7,47 @@ define('PAGE', 'courses');
 include('./adminInclude/header.php'); 
 include('../dbConnection.php');
 
- if(isset($_SESSION['is_admin_login'])){
+if (isset($_SESSION['is_admin_login'])) {
   $adminEmail = $_SESSION['adminLogEmail'];
- }
-  // else {
-//   echo "<script> location.href='../index.php'; </script>";
-//  }
- if(isset($_REQUEST['courseSubmitBtn'])){
+}
+
+// Check if form is submitted
+if (isset($_REQUEST['courseSubmitBtn'])) {
   // Checking for Empty Fields
-  if(($_REQUEST['course_name'] == "") || ($_REQUEST['course_desc'] == "") || ($_REQUEST['course_author'] == "") || ($_REQUEST['course_duration'] == "") || ($_REQUEST['course_price'] == "") || ($_REQUEST['course_original_price'] == "")){
-   // msg displayed if required field missing
-   $msg = '<div class="alert alert-warning col-sm-6 ml-5 mt-2" role="alert"> Fill All Fileds </div>';
+  if (empty($_REQUEST['course_name']) || empty($_REQUEST['course_desc']) || empty($_REQUEST['course_author']) || empty($_REQUEST['course_duration']) || empty($_REQUEST['course_price']) || empty($_REQUEST['course_original_price'])) {
+    // Message displayed if required field is missing
+    $msg = '<div class="alert alert-warning col-sm-6 ml-5 mt-2" role="alert"> Fill All Fields </div>';
   } else {
-   // Assigning User Values to Variable
-   $course_name = $_REQUEST['course_name'];
-   $course_desc = $_REQUEST['course_desc'];
-   $course_author = $_REQUEST['course_author'];
-   $course_duration = $_REQUEST['course_duration'];
-   $course_price = abs($_REQUEST['course_price']);
-   $course_original_price = abs($_REQUEST['course_original_price']);
-   $course_image = $_FILES['course_img']['name']; 
-   $course_image_temp = $_FILES['course_img']['tmp_name'];
-   $img_folder = '../image/courseimg/'. $course_image; 
-   move_uploaded_file($course_image_temp, $img_folder);
-    $sql = "INSERT INTO course (course_name, course_desc, course_author, course_img, course_duration, course_price, course_original_price) VALUES ('$course_name', '$course_desc','$course_author', '$img_folder', '$course_duration', '$course_price', '$course_original_price')";
-    if($conn->query($sql) == TRUE){
-     // below msg display on form submit success
-     $msg = '<div class="alert alert-success col-sm-6 ml-5 mt-2" role="alert"> Course Added Successfully </div>';
+    // Assigning User Values to Variables
+    $course_name = $_REQUEST['course_name'];
+    $course_desc = $_REQUEST['course_desc'];
+    $course_author = $_REQUEST['course_author'];
+    $course_duration = $_REQUEST['course_duration'];
+    $course_price = abs($_REQUEST['course_price']);
+    $course_original_price = abs($_REQUEST['course_original_price']);
+    $course_image = $_FILES['course_img']['name']; 
+    $course_image_temp = $_FILES['course_img']['tmp_name'];
+    $img_folder = '../image/courseimg/' . $course_image; 
+    move_uploaded_file($course_image_temp, $img_folder);
+
+    // Default value for t_Email
+    $t_Email = '0'; 
+
+    // Insert query with t_Email
+    $sql = "INSERT INTO course (course_name, course_desc, course_author, course_img, course_duration, course_price, course_original_price, t_Email) 
+            VALUES ('$course_name', '$course_desc', '$course_author', '$img_folder', '$course_duration', '$course_price', '$course_original_price', '$t_Email')";
+    
+    if ($conn->query($sql) === TRUE) {
+      // Success message
+      $msg = '<div class="alert alert-success col-sm-6 ml-5 mt-2" role="alert"> Course Added Successfully </div>';
     } else {
-     // below msg display on form submit failed
-     $msg = '<div class="alert alert-danger col-sm-6 ml-5 mt-2" role="alert"> Unable to Add Course </div>';
+      // Failure message
+      $msg = '<div class="alert alert-danger col-sm-6 ml-5 mt-2" role="alert"> Unable to Add Course </div>';
     }
   }
-  }
- ?>
-<div class="col-sm-6 mt-5  mx-3 jumbotron">
+}
+?>
+<div class="col-sm-6 mt-5 mx-3 jumbotron">
   <h3 class="text-center">Add New Course</h3>
   <form action="" method="POST" enctype="multipart/form-data">
     <div class="form-group">
@@ -50,7 +56,7 @@ include('../dbConnection.php');
     </div>
     <div class="form-group">
       <label for="course_desc">Course Description</label>
-      <textarea class="form-control" id="course_desc" name="course_desc" row=2></textarea>
+      <textarea class="form-control" id="course_desc" name="course_desc" rows="2"></textarea>
     </div>
     <div class="form-group">
       <label for="course_author">Author</label>
@@ -76,10 +82,11 @@ include('../dbConnection.php');
       <button type="submit" class="btn btn-danger" id="courseSubmitBtn" name="courseSubmitBtn">Submit</button>
       <a href="courses.php" class="btn btn-secondary">Close</a>
     </div>
-    <?php if(isset($msg)) {echo $msg; } ?>
+    <?php if (isset($msg)) { echo $msg; } ?>
   </form>
 </div>
-<!-- Only Number for input fields -->
+
+<!-- Only allow numbers for input fields -->
 <script>
   function isInputNumber(evt) {
     var ch = String.fromCharCode(evt.which);
@@ -88,17 +95,11 @@ include('../dbConnection.php');
     }
   }
 </script>
-</div>  <!-- div Row close from header -->
-</div>  <!-- div Conatiner-fluid close from header -->
-<!-- Only Number for input fields -->
-<script>
-  function isInputNumber(evt) {
-    var ch = String.fromCharCode(evt.which);
-    if (!(/[0-9]/.test(ch))) {
-      evt.preventDefault();
-    }
-  }
 
+</div>  <!-- div Row close from header -->
+</div>  <!-- div Container-fluid close from header -->
+
+<script>
   document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("courseSubmitBtn").addEventListener("click", function (event) {
       var courseName = document.getElementById("course_name").value.trim();
@@ -119,33 +120,33 @@ include('../dbConnection.php');
       var isValid = true;
 
       if (!nameRegex.test(courseName)) {
-        displayErrorMessage("course_name", "Course name only contains ");
+        displayErrorMessage("course_name", "Course name should contain only letters.");
         isValid = false;
       }
 
       if (!descRegex.test(courseDesc)) {
-        displayErrorMessage("course_desc", "Course description only contains english alphabets.");
+        displayErrorMessage("course_desc", "Course description should only contain letters.");
         isValid = false;
       }
 
       if (!authorRegex.test(courseAuthor)) {
-        displayErrorMessage("course_author", "Author name format does not match");
+        displayErrorMessage("course_author", "Author name format is incorrect.");
         isValid = false;
       }
 
       if (!durationRegex.test(courseDuration)) {
-        displayErrorMessage("course_duration", "Duration format does not match. eg: 2 Months/Weeks");
+        displayErrorMessage("course_duration", "Duration format is incorrect. e.g., 2 Months/Weeks.");
         isValid = false;
       }
 
       if (!priceRegex.test(courseOriginalPrice) || !priceRegex.test(coursePrice)) {
-        displayErrorMessage("course_original_price", "Course price must be a positive number.");
-        displayErrorMessage("course_price", "Course selling price must be a positive number.");
+        displayErrorMessage("course_original_price", "Price must be a positive number.");
+        displayErrorMessage("course_price", "Selling price must be a positive number.");
         isValid = false;
       }
 
       if (!imgRegex.test(courseImg)) {
-        displayErrorMessage("course_img", "Invalid image format. Supported formats: jpg, jpeg, png, dng.");
+        displayErrorMessage("course_img", "Invalid image format. Supported: jpg, jpeg, png, dng.");
         isValid = false;
       }
 
@@ -166,7 +167,6 @@ include('../dbConnection.php');
     }
   });
 </script>
-
 
 <?php
 include('./adminInclude/footer.php'); 

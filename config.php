@@ -1,8 +1,11 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$upassword = "";
-$dbname = "e_learning";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$db_host = "127.0.0.1";
+$db_user = "root";
+$db_password = "C0d!ng123";
+$db_name = "e_learning";
 
 # connection create
 $conn = mysqli_connect($servername,$username,$upassword,$dbname);

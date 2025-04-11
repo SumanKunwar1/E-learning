@@ -71,12 +71,13 @@ if (isset($_REQUEST['course_id'])) {
                     <h5 class="card-title">Course Name: '.$row['course_name'].'</h5>
                     <p class="card-text"> Description: '.$row['course_desc'].'</p>
                     <p class="card-text"> Duration: '.$row['course_duration'].'</p>
-                    <form action="checkout.php" method="post">
+                    
+                  </div>
+                  <form action="checkout.php" method="post">
                       <p class="card-text d-inline">Price: <small><del>&#36;'.$row['course_original_price'].'</del></small> <span class="font-weight-bolder">&#36; '.$row['course_price'].'<span></p>
                       <input type="hidden" name="id" value='. $row["course_price"] .'> 
-                      <button type="submit" class="btn btn-primary text-white font-weight-bolder float-right" name="buy">Buy Now</button>
+                      <button style="max-width:25%" type="submit" class="btn btn-primary text-white font-weight-bolder float-right " name="buy">Book Now</button>
                     </form>
-                  </div>
                 </div>
               ';
             }
@@ -94,9 +95,9 @@ if (isset($_REQUEST['course_id'])) {
         <table class="table table-bordered table-hover">
           <thead>
             <tr>
-              <th scope="col">Lesson No.</th>
-              <th scope="col">Lesson Name</th>
-              <th scope="col">Lesson Description</th>
+              <th scope="col">Session No.</th>
+              <th scope="col">Session Name</th>
+              <th scope="col">Session Description</th>
             </tr>
           </thead>
           <tbody>';
@@ -118,7 +119,11 @@ if (isset($_REQUEST['course_id'])) {
     }
 
     // Join learner and feedback tables to display name and image
-    $sql = "SELECT feedback.*, learner.l_Name, learner.l_img, AVG(feedback.f_ratings) AS average_rating FROM learner INNER JOIN feedback ON feedback.l_Id = learner.l_Id WHERE feedback.course_id = '$course_id' GROUP BY feedback.l_Id";
+    $sql = "SELECT feedback.*, learner.l_Name, learner.l_img, AVG(feedback.f_ratings) AS average_rating 
+            FROM learner 
+            INNER JOIN feedback ON feedback.l_Id = learner.l_Id 
+            WHERE feedback.course_id = '$course_id' 
+            GROUP BY feedback.f_id, learner.l_Name, learner.l_img";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
